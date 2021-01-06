@@ -15,6 +15,7 @@ type Config struct {
 	JSONOutput     bool
 	ProtoPaths     string
 	ProtoFiles     []string
+	OutputGrpcurl  bool
 }
 
 var config *Config
@@ -28,6 +29,7 @@ var (
 	jsonOutput     = flag.Bool("json", false, "Json output")
 	protoPaths     = flag.String("proto-path", "", "Paths with proto files")
 	protoFiles     = flag.String("proto-files", "", "Names of proto files")
+	outputGrpcurl  = flag.Bool("output-as-grpcurl", false, "Output each request as grpcurl")
 )
 
 //Init inits config
@@ -43,6 +45,7 @@ func Init() {
 		*jsonOutput,
 		*protoPaths,
 		strings.Split(*protoFiles, ","),
+		*outputGrpcurl,
 	}
 }
 

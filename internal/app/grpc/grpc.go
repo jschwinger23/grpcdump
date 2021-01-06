@@ -67,7 +67,8 @@ func Decode(path string, frame *http2.DataFrame, side int, state *models.GrpcSta
 			if err := msg.Unmarshal(data); err != nil {
 				logrus.Errorf("Error unmarshal request: %s", err.Error())
 			}
-			return msg.String(), nil
+			bs, err := msg.MarshalJSON()
+			return string(bs), err
 		case 2:
 			msg := *(method.Response)
 			if err := msg.Unmarshal(data); err != nil {
